@@ -29,9 +29,9 @@ namespace Builder_And_FluentBuilder
 
     public interface IProductStockReportBuilder
     {
-        void BuildHeader();
-        void BuildBody();
-        void BuildFooter();
+        IProductStockReportBuilder BuildHeader(); // void
+        IProductStockReportBuilder BuildBody(); // void
+        IProductStockReportBuilder BuildFooter(); // void
         ProductStockReport GetReport();
     }
 
@@ -46,19 +46,22 @@ namespace Builder_And_FluentBuilder
             _productStockReport = new ProductStockReport();
         }
 
-        public void BuildHeader()
+        public IProductStockReportBuilder BuildHeader() // void
         {
             _productStockReport.HeaderPart = $"STOCK REPORT FOR ALL THE PRODUCTS ON DATE: {DateTime.Now}\n";
+            return this; //
         }
 
-        public void BuildBody()
+        public IProductStockReportBuilder BuildBody() // void
         {
             _productStockReport.BodyPart = string.Join(Environment.NewLine, _products.Select(p => $"Product name: {p.Name}, product price: {p.Price}"));
+            return this; //
         }
 
-        public void BuildFooter()
+        public IProductStockReportBuilder BuildFooter() // void
         {
             _productStockReport.FooterPart = "\nReport provided by the IT_PRODUCTS company.";
+            return this; //
         }
 
         public ProductStockReport GetReport()
@@ -82,9 +85,13 @@ namespace Builder_And_FluentBuilder
 
         public void BuildStockReport()
         {
-            _productStockReportBuilder.BuildHeader();
-            _productStockReportBuilder.BuildBody();
-            _productStockReportBuilder.BuildFooter();
+            _productStockReportBuilder // Resultat, de går att kedja.
+                .BuildHeader()
+                .BuildBody()
+                .BuildFooter();
+            //_productStockReportBuilder.BuildHeader();
+            //_productStockReportBuilder.BuildBody();
+            //_productStockReportBuilder.BuildFooter();
         }
     }
 
