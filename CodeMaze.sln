@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze", "CodeMaze\CodeMaze.csproj", "{F97A3E07-4568-4D50-8509-F1A5F6CE4F28}"
 EndProject
@@ -21,11 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\In
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design Patterns", "Design Patterns", "{4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder_And_FluentBuilder", "Builder_And_FluentBuilder\Builder_And_FluentBuilder.csproj", "{A4B1DE86-4431-4DBB-8211-BCB31F32143B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Builder_And_FluentBuilder", "Builder_And_FluentBuilder\Builder_And_FluentBuilder.csproj", "{A4B1DE86-4431-4DBB-8211-BCB31F32143B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentBuilder_WithRecursiveGenerics", "FluentBuilder_WithRecursiveGenerics\FluentBuilder_WithRecursiveGenerics.csproj", "{54142792-66A0-46B2-B0E7-C17BEB5B4C0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentBuilder_WithRecursiveGenerics", "FluentBuilder_WithRecursiveGenerics\FluentBuilder_WithRecursiveGenerics.csproj", "{54142792-66A0-46B2-B0E7-C17BEB5B4C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacetedBuilder", "FacetedBuilder\FacetedBuilder.csproj", "{BB8BDB69-4F28-4E4A-8332-8CA3112C853C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacetedBuilder", "FacetedBuilder\FacetedBuilder.csproj", "{BB8BDB69-4F28-4E4A-8332-8CA3112C853C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryMethod", "FactoryMethod\FactoryMethod.csproj", "{CF8C8EA2-F396-42D7-A8E4-219887898521}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{BB8BDB69-4F28-4E4A-8332-8CA3112C853C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB8BDB69-4F28-4E4A-8332-8CA3112C853C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB8BDB69-4F28-4E4A-8332-8CA3112C853C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8C8EA2-F396-42D7-A8E4-219887898521}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8C8EA2-F396-42D7-A8E4-219887898521}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8C8EA2-F396-42D7-A8E4-219887898521}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8C8EA2-F396-42D7-A8E4-219887898521}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{A4B1DE86-4431-4DBB-8211-BCB31F32143B} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
 		{54142792-66A0-46B2-B0E7-C17BEB5B4C0A} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
 		{BB8BDB69-4F28-4E4A-8332-8CA3112C853C} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
+		{CF8C8EA2-F396-42D7-A8E4-219887898521} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1F49881-530F-4F5F-9806-02B06E435619}
