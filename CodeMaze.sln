@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeMaze", "CodeMaze\CodeMaze.csproj", "{F97A3E07-4568-4D50-8509-F1A5F6CE4F28}"
 EndProject
@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Singleton", "Singleton\Sing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adapter", "Adapter\Adapter.csproj", "{033F87DF-A5E9-4495-9C16-ACE9DAB01E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composite", "Composite\Composite.csproj", "{352ADBE5-31A1-49DD-A14C-66269825AC20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Composite", "Composite\Composite.csproj", "{352ADBE5-31A1-49DD-A14C-66269825AC20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Decorator", "Decorator\Decorator.csproj", "{6E3534F0-61FC-48A9-9483-F7ACAE663784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{352ADBE5-31A1-49DD-A14C-66269825AC20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{352ADBE5-31A1-49DD-A14C-66269825AC20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{352ADBE5-31A1-49DD-A14C-66269825AC20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E3534F0-61FC-48A9-9483-F7ACAE663784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E3534F0-61FC-48A9-9483-F7ACAE663784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E3534F0-61FC-48A9-9483-F7ACAE663784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E3534F0-61FC-48A9-9483-F7ACAE663784}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{A30E918D-B98A-483E-84A8-5931FA1CC27B} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
 		{033F87DF-A5E9-4495-9C16-ACE9DAB01E2F} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
 		{352ADBE5-31A1-49DD-A14C-66269825AC20} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
+		{6E3534F0-61FC-48A9-9483-F7ACAE663784} = {4E714D6A-2CC1-4E0D-B8C0-06CA30D9C1BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1F49881-530F-4F5F-9806-02B06E435619}
