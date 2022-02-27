@@ -60,6 +60,36 @@ namespace Facade
             Console.WriteLine("Order is being shipped to {0}...", _order.ShippingAddress);
         }
     }
+
+    public class Facade // Added facade class with the implementation logic. This facade class acts as a middleware between the user and the complexity of the system, without changing the business logic. Then we can simplify the Main class (see changes!). This means we have freed the user of the unnecessary pressure of knowing all the required steps for the food to arrive.
+    {
+        private readonly OnlineRestaurant _restaurant;
+        private readonly ShippingService _shippingService;
+
+        public Facade(OnlineRestaurant restaurant, ShippingService shippingService)
+        {
+            _restaurant = restaurant;
+            _shippingService = shippingService;
+        }
+
+        public void OrderFood(List<Order> orders)
+        {
+            foreach (var order in orders)
+            {
+                _restaurant.AddOrderToCart(order);
+            }
+
+            _restaurant.CompleteOrder();
+
+            foreach (var order in orders)
+            {
+                _shippingService.AcceptOrder(order);
+                _shippingService.CalculateShippingExpenses();
+                _shippingService.ShipOrder();
+            }
+        }
+    }
+
     class Program
     {
         // Structural. A facade for the end user to simplify the usage of the subsystems that are poorly designed and/or too complicated, by hiding their implementation details. It also compes in handy when working with complex libraries and API:s.
@@ -69,20 +99,24 @@ namespace Facade
             var restaurant = new OnlineRestaurant();
             var shippingService = new ShippingService();
 
+            var facade = new Facade(restaurant, shippingService);
+
             var chickenOrder = new Order() { DishName = "Chicken with rice", DishPrice = 20.0, User = "User1", ShippingAddress = "Random street 123" };
             var sushiOrder = new Order() { DishName = "Sushi", DishPrice = 52.0, User = "User2", ShippingAddress = "More random street 321" };
 
-            restaurant.AddOrderToCart(chickenOrder);
-            restaurant.AddOrderToCart(sushiOrder);
-            restaurant.CompleteOrder();
+            facade.OrderFood(new List<Order>() { chickenOrder, sushiOrder });
 
-            shippingService.AcceptOrder(chickenOrder);
-            shippingService.CalculateShippingExpenses();
-            shippingService.ShipOrder();
+            //restaurant.AddOrderToCart(chickenOrder);
+            //restaurant.AddOrderToCart(sushiOrder);
+            //restaurant.CompleteOrder();
 
-            shippingService.AcceptOrder(sushiOrder);
-            shippingService.CalculateShippingExpenses();
-            shippingService.ShipOrder();
+            //shippingService.AcceptOrder(chickenOrder);
+            //shippingService.CalculateShippingExpenses();
+            //shippingService.ShipOrder();
+
+            //shippingService.AcceptOrder(sushiOrder);
+            //shippingService.CalculateShippingExpenses();
+            //shippingService.ShipOrder();
 
             Console.ReadLine();
         }
