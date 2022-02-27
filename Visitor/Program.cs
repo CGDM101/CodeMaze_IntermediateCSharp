@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace Visitor
 {
+    public enum AlertReport
+    {
+        NotAnalyzable = -1,
+        LowRisk = 0,
+        HighRisk = 1
+    }
     public interface ISicknessAlertVisitable
     {
         AlertReport Accept(ISicknessAlertVisitor visitor);
@@ -25,7 +31,12 @@ namespace Visitor
     {
         // X-ray image-specific data and methods
         public AlertReport Accept(ISicknessAlertVisitor visitor) => visitor.Visit(this);
-    } // .. and so on for other visitable data elements.
+    }
+
+    public class EcgReading : ISicknessAlertVisitable
+    {
+        public AlertReport Accept(ISicknessAlertVisitor visitor) => visitor.Visit(this);
+    }
 
     public class HivDetector : ISicknessAlertVisitor
     {
@@ -64,7 +75,7 @@ namespace Visitor
 
             foreach (var sample in testResults)
             {
-                foreach (var detector in _detectors)
+                foreach (var detector in detectors) // _detectors?
                 {
                     alertReports.Add(sample.Accept(detector));
                 }
