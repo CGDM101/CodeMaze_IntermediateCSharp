@@ -24,8 +24,10 @@ namespace OC_P_Exempel2
         public Screen Screen { get; set; }
     }
 
-    public class MonitorFilter
+    public class MonitorFilter : IFilter<ComputerMonitor>
     {
+        public List<ComputerMonitor> Filter(IEnumerable<ComputerMonitor> monitors, ISpecification<ComputerMonitor> specification) =>
+                monitors.Where(m => specification.isSatisfied(m)).ToList();
         public List<ComputerMonitor> FilterByType(IEnumerable<ComputerMonitor> monitors, MonitorType type) =>
             monitors.Where(m => m.Type == type).ToList();
 
@@ -33,6 +35,28 @@ namespace OC_P_Exempel2
         public List<ComputerMonitor> FilterByScreen(IEnumerable<ComputerMonitor> monitors, Screen screen) =>
             monitors.Where(m => m.Screen == screen).ToList();
        
+    }
+
+    public interface ISpecification<T>
+    {
+        bool isSatisfied(T item);
+    }
+
+    public interface IFilter<T>
+    {
+        List<T> Filter(IEnumerable<T> monitors, ISpecification<T> specification);
+    }
+
+    public class MonitorTypeSpecification: ISpecification<ComputerMonitor>
+    {
+        private readonly MonitorType _type;
+
+        public MonitorTypeSpecification(MonitorType type)
+        {
+            _type = type;
+        }
+
+        public bool isSatisfied(ComputerMonitor item) => item.Type == _type;
     }
 
     class Program
@@ -50,7 +74,8 @@ namespace OC_P_Exempel2
 
             var filter = new MonitorFilter();
 
-            var lcdMonitors = filter.FilterByType(monitors, MonitorType.LCD);
+            var lcdMonitors = filter.Filter(monitors, new MonitorTypeSpecification(MonitorType.LCD));
+                        
             Console.WriteLine("All LCD monitors");
             foreach (var monitor in lcdMonitors)
             {
