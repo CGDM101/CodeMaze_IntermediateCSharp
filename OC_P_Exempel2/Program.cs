@@ -59,8 +59,23 @@ namespace OC_P_Exempel2
         public bool isSatisfied(ComputerMonitor item) => item.Type == _type;
     }
 
+
+    public class ScreenSpecification : ISpecification<ComputerMonitor>
+    {
+        private readonly Screen _screen;
+
+        public ScreenSpecification(Screen screen)
+        {
+            _screen = screen;
+        }
+
+        public bool isSatisfied(ComputerMonitor item) => item.Screen == _screen;
+    }
     class Program
     {
+        // We are lowering the chance of creating bugs. If we have a fully working and tested class in production, by extending it instead of changing it, we would have a lesser impact on the rest of the system.
+        // We introduce another class to extend the behaviour of the main class.
+        // Sometimes it is impossible to extend our class; we have to modify existing functionality. It is ok, but we should try to make those changes as discrete as possible.
         static void Main(string[] args)
         {
             var monitors = new List<ComputerMonitor>
@@ -78,6 +93,13 @@ namespace OC_P_Exempel2
                         
             Console.WriteLine("All LCD monitors");
             foreach (var monitor in lcdMonitors)
+            {
+                Console.WriteLine($"Name: {monitor.Name}, Type: {monitor.Type}, Screen: {monitor.Screen}");
+            }
+
+            Console.WriteLine("All widescreen monitors");
+            var wideScreenMonitors = filter.Filter(monitors, new ScreenSpecification(Screen.WideScreen));
+            foreach (var monitor in wideScreenMonitors)
             {
                 Console.WriteLine($"Name: {monitor.Name}, Type: {monitor.Type}, Screen: {monitor.Screen}");
             }
