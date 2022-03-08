@@ -28,6 +28,11 @@ namespace OC_P_Exempel2
     {
         public List<ComputerMonitor> FilterByType(IEnumerable<ComputerMonitor> monitors, MonitorType type) =>
             monitors.Where(m => m.Type == type).ToList();
+
+        // Om vi behöver filtrera på screen också, förutom monitortype:
+        public List<ComputerMonitor> FilterByScreen(IEnumerable<ComputerMonitor> monitors, Screen screen) =>
+            monitors.Where(m => m.Screen == screen).ToList();
+       
     }
 
     class Program
