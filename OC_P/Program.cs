@@ -28,7 +28,15 @@ namespace OC_P
 
             foreach (var devReport in _developerReports)
             {
-                totaSalaries += devReport.HourlyRate * devReport.WorkingHours;
+                // Modification of existing method due to changed requirements - not OCP!
+                if (devReport.Level=="Senior developer")
+                {
+                    totaSalaries += devReport.HourlyRate * devReport.WorkingHours * 1.2;
+                }
+                else
+                {
+                    totaSalaries += devReport.HourlyRate * devReport.WorkingHours;
+                }
             }
 
             return totaSalaries;
