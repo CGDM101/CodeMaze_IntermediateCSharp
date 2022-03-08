@@ -15,47 +15,72 @@ namespace OC_P
 
     public class SalaryCalculator
     {
-        private readonly IEnumerable<DeveloperReport> _developerReports;
+        private readonly IEnumerable<BaseSalaryCalculator> _developerCalculation;
 
-        public SalaryCalculator(List<DeveloperReport> developerReports)
+        public SalaryCalculator(List<BaseSalaryCalculator> developerCalculation)
         {
-            _developerReports = developerReports;
+            _developerCalculation = developerCalculation;
         }
 
         public double CalculateTotalSalaries()
         {
             double totaSalaries = 0D;
 
-            foreach (var devReport in _developerReports)
+            foreach (var devCalc in _developerCalculation)
             {
-                // Modification of existing method due to changed requirements - not OCP!
-                if (devReport.Level=="Senior developer")
-                {
-                    totaSalaries += devReport.HourlyRate * devReport.WorkingHours * 1.2;
-                }
-                else
-                {
-                    totaSalaries += devReport.HourlyRate * devReport.WorkingHours;
-                }
+                totaSalaries += devCalc.CalculateSalary();
             }
 
             return totaSalaries;
         }
     }
+
+    public abstract class BaseSalaryCalculator
+    {
+        protected DeveloperReport DeveloperReport { get; private set; }
+
+        public BaseSalaryCalculator(DeveloperReport developerReport)
+        {
+            DeveloperReport = developerReport;
+        }
+
+        public abstract double CalculateSalary();
+    }
+
+    public class SeniorDevSalaryCalculator : BaseSalaryCalculator
+    {
+        public SeniorDevSalaryCalculator(DeveloperReport report)
+            :base(report)
+        {
+        }
+
+        public override double CalculateSalary() => DeveloperReport.HourlyRate * DeveloperReport.WorkingHours * 1.2;
+    }
+
+    public class JuniorDevSalaryCalculator : BaseSalaryCalculator
+    {
+        public JuniorDevSalaryCalculator(DeveloperReport developerReport)
+            :base(developerReport)
+        {
+        }
+
+        public override double CalculateSalary() => DeveloperReport.HourlyRate * DeveloperReport.WorkingHours;
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             // OCP:The software entities (classes or methods) should be open for extension, but closed for modification. Extend it - not modify!
 
-            var devReports = new List<DeveloperReport>
+            var devCalculations = new List<BaseSalaryCalculator>
             {
-                new DeveloperReport{ Id=1,Name="Dev1",Level="Senior developer", HourlyRate=30.5,WorkingHours=160},
-                new DeveloperReport{ Id=2,Name="Dev2",Level="Junior developer", HourlyRate=20,WorkingHours=150},
-                new DeveloperReport{ Id=3,Name="Dev3",Level="Senior developer", HourlyRate=30.5,WorkingHours=180}
+                new SeniorDevSalaryCalculator(new DeveloperReport{ Id=1,Name="Dev1",Level="Senior developer", HourlyRate=30.5,WorkingHours=160}),
+                new JuniorDevSalaryCalculator(new DeveloperReport{ Id=2,Name="Dev2",Level="Junior developer", HourlyRate=20,WorkingHours=150}),
+                new SeniorDevSalaryCalculator(new DeveloperReport{ Id=3,Name="Dev3",Level="Senior developer", HourlyRate=30.5,WorkingHours=180})
             };
 
-            var calculator = new SalaryCalculator(devReports);
+            var calculator = new SalaryCalculator(devCalculations);
             Console.WriteLine($"Sum of all the developer salaries is {calculator.CalculateTotalSalaries()} dollars");
         }
     }
