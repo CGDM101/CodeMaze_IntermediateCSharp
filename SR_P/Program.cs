@@ -26,7 +26,7 @@ namespace SR_P
         public WorkReport() // 1. Create entries.
         {
             _entries = new List<WorkReportEntry>();
-        }
+        } 
 
         public void AddEntry(WorkReportEntry entry) => _entries.Add(entry); // 2. Add entries
 
