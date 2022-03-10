@@ -22,7 +22,7 @@ namespace LS_P
         {
         }
 
-        public new int Calculate() => _numbers.Where(x => x % 2 == 0).Sum();
+        public new int Calculate() => _numbers.Where(x => x % 2 == 0).Sum(); // new keyword because hiding the inherited member Calculate() is intended.
     }
 
     class Program
