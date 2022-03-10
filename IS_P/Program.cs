@@ -21,6 +21,32 @@ namespace IS_P
         }
     }
 
+    public class Car : IVehicle
+    {
+        public void Drive()
+        {
+            Console.WriteLine("Driving a car.");
+        }
+
+        public void Fly()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class AirPlane : IVehicle
+    {
+        public void Drive()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fly()
+        {
+            Console.WriteLine("Flying a plane.");
+        }
+    }
+
     class Program
     {
         // No client should be forced to depend upon methods it does not use.
