@@ -2,13 +2,17 @@
 
 namespace IS_P
 {
-    public interface IVehicle
+    public interface ICar
     {
         void Drive();
+    }
+
+    public interface IAirPlane
+    {
         void Fly();
     }
 
-    public class MultiFunctionalCar : IVehicle
+    public class MultiFunctionalCar : ICar, IAirPlane
     {
         public void Drive()
         {
@@ -21,26 +25,18 @@ namespace IS_P
         }
     }
 
-    public class Car : IVehicle
+    public interface IMultifuctionalVehicle : ICar, IAirPlane { } // a higherlevel interface
+
+    public class Car : ICar
     {
         public void Drive()
         {
             Console.WriteLine("Driving a car.");
         }
-
-        public void Fly()
-        {
-            throw new NotImplementedException();
-        }
     }
 
-    public class AirPlane : IVehicle
+    public class AirPlane : IAirPlane
     {
-        public void Drive()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Fly()
         {
             Console.WriteLine("Flying a plane.");
