@@ -12,7 +12,7 @@ namespace LS_P
             _numbers = numbers;
         }
 
-        public int Calculate() => _numbers.Sum();
+        public virtual int Calculate() => _numbers.Sum();
     }
 
     public class EvenNumbersSumCalculator : SumCalculator
@@ -22,7 +22,7 @@ namespace LS_P
         {
         }
 
-        public new int Calculate() => _numbers.Where(x => x % 2 == 0).Sum(); // new keyword because hiding the inherited member Calculate() is intended.
+        public override int Calculate() => _numbers.Where(x => x % 2 == 0).Sum(); // new keyword because hiding the inherited member Calculate() is intended.
     }
 
     class Program
