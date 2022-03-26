@@ -36,6 +36,8 @@ namespace DI_P
         {
             _employees.Add(employee);
         }
+
+        public List<Employee> Employees => _employees;
     }
 
     // higherlevel class
@@ -48,10 +50,8 @@ namespace DI_P
             _empManager = empManager;
         }
 
-        public int CountFemaleManagers()
-        {
-            // logic goes here.
-        }
+        public int CountFemaleManagers() =>
+            _empManager.Employees.Count(emp => emp.Gender == Gender.Female && emp.Position == Position.Manager);
     }
 
     class Program
