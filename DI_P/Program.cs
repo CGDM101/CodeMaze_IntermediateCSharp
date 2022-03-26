@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DI_P
 {
@@ -23,7 +25,7 @@ namespace DI_P
     }
 
     // low level class:
-    public class EmployeeManager
+    public class EmployeeManager : IEmployeeSearchable
     {
         private readonly List<Employee> _employees;
 
@@ -37,22 +39,29 @@ namespace DI_P
             _employees.Add(employee);
         }
 
-        public List<Employee> Employees => _employees;
+        public IEnumerable<Employee> GetEmployeesByGenderAndPosition(Gender gender, Position position)
+            => _employees.Where(emp => emp.Gender == gender && emp.Position == position);
     }
 
     // higherlevel class
     public class EmployeeStatistics
     {
-        private readonly EmployeeManager _empManager;
+        private readonly IEmployeeSearchable _emp;
 
-        public EmployeeStatistics(EmployeeManager empManager)
-        {
-            _empManager = empManager;
-        }
+        public EmployeeStatistics (IEmployeeSearchable emp)
+	    {
+            _emp = emp;
+	    }
 
-        public int CountFemaleManagers() =>
-            _empManager.Employees.Count(emp => emp.Gender == Gender.Female && emp.Position == Position.Manager);
+        public int CountFemaleManagers () =>
+            _emp.GetEmployeesByGenderAndPosition(Gender.Female, Position.Manager).Count();
     }
+    
+    // Interface to decouble the EmployeeStatistics and the EmployeeManager, and let it depend on a higher abstraction. The EmployeeStatistics should not depend on the lower-level EmployeeManager, and the EmployeeManager should be able to change its behaviour.
+    public interface IEmployeeSearchable
+	{
+        IEnumerable<Employee> GetEmployeesByGenderAndPosition(Gender gender, Position position);
+	}
 
     class Program
     {
@@ -67,9 +76,16 @@ namespace DI_P
         // DIP creates a decoupled structure between high-level and low-level modules by introducing abstraction between them.
 
         // DEPENDENCY INJECTION is one way of implementing the DIP.
+
+        // Purpose of DIP is to introduce an abstraction between high and low-level components, to remove the dependencies between the components.
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var empManager = new EmployeeManager();
+            empManager.AddEmployee(new Employee { Name = "Lean", Gender = Gender.Female, Position = Position.Manager });
+            empManager.AddEmployee(new Employee { Name = "Mike", Gender = Gender.Male, Position = Position.Administrator });
+
+            var stats = new EmployeeStatistics(empManager);
+            Console.WriteLine($"Number of female managers in our company is: {stats.CountFemaleManagers()}");
         }
     }
 }
